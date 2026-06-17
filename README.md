@@ -1,0 +1,2 @@
+# safelog
+Truk &amp; Logistik
