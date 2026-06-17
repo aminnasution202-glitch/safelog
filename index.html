@@ -70,6 +70,876 @@
     .navbar-name span { color: var(--orange); }
     .navbar-right { display: flex; gap: 10px; align-items: center; }
 
+    /* ── NAV LINKS (menu setelah login) ────────── */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 8px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-600);
+      font-size: .875rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      transition: background .15s, color .15s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      background: var(--orange-pale);
+      color: var(--orange);
+    }
+    .navbar-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--gray-200);
+      margin: 0 4px;
+    }
+
+    /* ── BUTTONS ────────────────────────────────── */
+    .btn {
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      padding: 9px 20px;
+      transition: background .18s, transform .1s, box-shadow .18s;
+      line-height: 1;
+    }
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--orange-dark); box-shadow: 0 4px 12px rgba(234,88,12,.35); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--orange);
+      border: 1.5px solid var(--orange);
+    }
+    .btn-outline:hover { background: var(--orange-pale); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--gray-600);
+      padding: 8px 14px;
+    }
+    .btn-ghost:hover { background: var(--gray-100); }
+
+    .btn-full {
+      width: 100%;
+      padding: 13px;
+      font-size: 1rem;
+      border-radius: var(--radius-md);
+    }
+    .btn-danger {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .btn-danger:hover { background: #fecaca; }
+
+    /* ── PAGES ──────────────────────────────────── */
+    .page { display: none; flex: 1; }
+    .page.active { display: flex; }
+
+    /* ── AUTH PAGES ─────────────────────────────── */
+    .auth-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+    .auth-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 420px;
+    }
+    .auth-icon {
+      width: 56px; height: 56px;
+      background: var(--orange-pale);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .auth-icon svg { width: 28px; height: 28px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gray-800);
+      margin-bottom: 6px;
+    }
+    .auth-sub {
+      font-size: .9rem;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+    }
+
+    /* ── FORM ELEMENTS ──────────────────────────── */
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: .95rem;
+      color: var(--gray-800);
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(234,88,12,.12);
+      background: var(--white);
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* ── ALERT ──────────────────────────────────── */
+    .alert {
+      display: none;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .alert.show { display: block; }
+    .alert-error { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .alert-info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+    /* divider */
+    .auth-divider {
+      text-align: center;
+      margin: 20px 0 4px;
+      font-size: .85rem;
+      color: var(--gray-400);
+    }
+    .auth-divider a {
+      color: var(--orange);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .auth-divider a:hover { text-decoration: underline; }
+
+    /* ── BOOKING PAGE ───────────────────────────── */
+    .booking-wrap {
+      flex: 1;
+      padding: 32px 16px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .booking-header {
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+    .booking-header h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--gray-800);
+    }
+    .booking-header p {
+      color: var(--gray-400);
+      font-size: .9rem;
+      margin-top: 4px;
+    }
+    .booking-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      width: 100%;
+      max-width: 680px;
+    }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--orange);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--orange-soft);
+    }
+    .booking-section { margin-bottom: 28px; }
+    .booking-section:last-of-type { margin-bottom: 0; }
+
+    /* user info banner */
+    .user-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--orange-pale);
+      border: 1.5px solid var(--orange-soft);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+    }
+    .user-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    .user-info-text p { font-size: .8rem; color: var(--gray-400); }
+    .user-info-text strong { font-size: .95rem; color: var(--gray-800); }
+
+    /* rp prefix */
+    .rp-wrap { position: relative; }
+    .rp-wrap span {
+      position: absolute;
+      left: 12px; top: 50%; transform: translateY(-50%);
+      font-size: .9rem;
+      color: var(--gray-400);
+      font-weight: 600;
+      pointer-events: none;
+    }
+    .rp-wrap input { padding-left: 38px; }
+
+    /* spinner */
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* toast */
+    #toast {
+      position: fixed;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--gray-800);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: .875rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+      z-index: 999;
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── PENDING NOTICE ──────────────────────────── */
+    .pending-notice {
+      background: #fefce8;
+      border: 1.5px solid #fde047;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      text-align: center;
+      color: #854d0e;
+      font-size: .9rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .pending-notice strong { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+
+    @media (max-width: 500px) {
+      .auth-card { padding: 28px 20px; }
+      .booking-card { padding: 22px 16px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 860px) {
+      .navbar { padding: 0 12px; }
+      .nav-links { gap: 0; overflow-x: auto; max-width: 38vw; }
+      .nav-links a { padding: 8px 8px; font-size: .8rem; }
+      #navUserName { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ NAVBAR ════════════════════════════════ -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <div class="navbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M1 17h2v2h2v-2h10v2h2v-2h2v-4l-3-6H3L1 13v4zm4-8h12l2 4H3l2-4zm-2 6a1 1 0 110-2 1 1 0 010 2zm12 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+    </div>
+    <span class="navbar-name">Safe<span>Trans</span></span>
+  </a>
+  <div class="navbar-right" id="navButtons">
+    <button class="btn btn-ghost" onclick="showPage('login')">Masuk</button>
+    <button class="btn btn-primary" onclick="showPage('register')">Daftar</button>
+  </div>
+  <div class="navbar-right" id="navUser" style="display:none">
+    <nav class="nav-links">
+      <a href="#">Info Muatan</a>
+      <a href="#">Info Bengkel</a>
+      <a href="#">Loker</a>
+      <a href="#">Berita</a>
+    </nav>
+    <div class="navbar-divider"></div>
+    <span id="navUserName" style="font-size:.875rem;font-weight:600;color:var(--gray-600)"></span>
+    <button class="btn btn-danger btn-ghost" onclick="logout()">Keluar</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════ HALAMAN LOGIN ════════════════════════ -->
+<div class="page active" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24"><path d="M15 3H7a2 2 0 00-2 2v14a2 2 0 002 2h8m4-9l-4-4m0 0l4 4m-4-4v12"/></svg>
+      </div>
+      <div class="auth-title">Masuk ke Akun</div>
+      <div class="auth-sub">Masukkan email dan kata sandi Anda</div>
+
+      <div class="alert alert-error" id="loginError"></div>
+      <div class="alert alert-info" id="loginInfo"></div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="contoh@email.com" />
+      </div>
+      <div class="field">
+        <label>Kata Sandi</label>
+        <input type="password" id="loginPassword" placeholder="Kata sandi Anda" onkeydown="if(event.key==='Enter') doLogin()" />
+      </div>
+      <button class="btn btn-primary btn-full" id="btnLogin" onclick="doLogin()">Masuk</button>
+
+      <div class="auth-divider">
+        Belum punya akun? <a href="#" onclick="showPage('register')">Daftar sekarang</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ HALAMAN DAFTAR ══════════════════════ -->
+<div class="page" id="page-register">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM19 8v6m3-3h-6"/></svg>
+      </div>
+      <div class="auth-title">Buat Akun Baru</div>
+      <div class="auth-sub">Isi data diri untuk mulai memesan truk</div>
+
+      <div class="alert alert-error" id="registerError"></div>
+      <div class="alert alert-success" id="registerSuccess"></div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nama Lengkap</label>
+          <input type="text" id="regNama" placeholder="Nama Anda" />
+        </div>
+        <div class="field">
+          <label>No. Telepon</label>
+          <input type="tel" id="regTelepon" placeholder="08xx-xxxx-xxxx" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="contoh@email.com" />
+      </div>
+      <div class="field">
+        <label>Nama PT / CV / Perorangan</label>
+        <input type="text" id="regPerusahaan" placeholder="Contoh: PT Maju Jaya / CV Berkah / Perorangan" />
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Jabatan</label>
+          <input type="text" id="regJabatan" placeholder="Direktur, Manajer, dll." />
+        </div>
+        <div class="field">
+          <label>Domisili</label>
+          <input type="text" id="regDomisili" placeholder="Kota / Kabupaten" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Kata Sandi</label>
+          <input type="password" id="regPassword" placeholder="Min. 6 karakter" />
+        </div>
+        <div class="field">
+          <label>Ulangi Kata Sandi</label>
+          <input type="password" id="regConfirm" placeholder="Ulangi kata sandi" />
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="btnRegister" onclick="doRegister()">Buat Akun</button>
+
+      <div class="auth-divider">
+        Sudah punya akun? <a href="#" onclick="showPage('login')">Masuk di sini</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ HALAMAN BOOKING ═════════════════════ -->
+<div class="page" id="page-booking">
+  <div class="booking-wrap">
+
+    <div class="booking-header">
+      <h2>Pemesanan Truk</h2>
+      <p>Isi detail pengiriman Anda di bawah ini</p>
+    </div>
+
+    <!-- User info banner -->
+    <div class="user-banner" style="max-width:680px;width:100%">
+      <div class="user-avatar" id="userAvatar">A</div>
+      <div class="user-info-text">
+        <strong id="bannerName">–</strong>
+        <p id="bannerEmail">–</p>
+      </div>
+    </div>
+
+    <!-- ══ PANEL PESAN TRUK ══ -->
+    <div style="width:100%;max-width:680px;">
+    <div class="booking-card">
+
+      <!-- BAGIAN 1: Tipe Kendaraan -->
+      <div class="booking-section">
+        <div class="section-label">Kendaraan</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tipe Truk</label>
+            <select id="tipeTruk">
+              <option value="">– Pilih Tipe –</option>
+              <option>CDE</option>
+              <option>CDD</option>
+              <option>Fuso</option>
+              <option>Tronton</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Karoseri</label>
+            <select id="karoseri">
+              <option value="">– Pilih Karoseri –</option>
+              <option>Box</option>
+              <option>Wingbox</option>
+              <option>Bak Central</option>
+              <option>Triway</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAGIAN 2: Rute -->
+      <div class="booking-section">
+        <div class="section-label">Rute Pengiriman</div>
+        <div class="field">
+          <label>Lokasi Muat</label>
+          <textarea id="lokasiMuat" rows="2" placeholder="Masukkan alamat atau deskripsi lokasi muat…"></textarea>
+        </div>
+        <div class="field">
+          <label>Lokasi Bongkar</label>
+          <textarea id="lokasiBongkar" rows="2" placeholder="Masukkan alamat atau deskripsi lokasi bongkar…"></textarea>
+        </div>
+      </div>
+
+      <!-- BAGIAN 3: Muatan -->
+      <div class="booking-section">
+        <div class="section-label">Detail Muatan</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Jenis Barang</label>
+            <input id="jenisBarang" placeholder="Elektronik, Furniture, dll." />
+          </div>
+          <div class="field">
+            <label>Tonase (Ton)</label>
+            <input id="tonase" type="number" step="0.1" placeholder="0.0" />
+          </div>
+        </div>
+      </div>
+
+      <!-- BAGIAN 4: Biaya -->
+      <div class="booking-section">
+        <div class="section-label">Rincian Biaya</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Biaya Muat</label>
+            <input id="biayaMuat" type="text" placeholder="Contoh: Ditanggung shipper / Rp 200.000" />
+          </div>
+          <div class="field">
+            <label>Biaya Bongkar</label>
+            <input id="biayaBongkar" type="text" placeholder="Contoh: Ditanggung penerima / Rp 150.000" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Harga Penawaran</label>
+          <div class="rp-wrap">
+            <span>Rp</span>
+            <input id="harga" type="number" placeholder="0" />
+          </div>
+        </div>
+      </div>
+
+      <!-- BAGIAN 5: Catatan -->
+      <div class="booking-section">
+        <div class="section-label">Catatan Tambahan</div>
+        <div class="field">
+          <label>Catatan</label>
+          <textarea id="catatan" rows="3" placeholder="Informasi tambahan untuk pengemudi atau tim kami…"></textarea>
+        </div>
+      </div>
+
+      <div class="alert alert-error" id="bookingError"></div>
+      <div class="alert alert-success" id="bookingSuccess"></div>
+
+      <button class="btn btn-primary btn-full" id="btnBooking" onclick="doBooking()">
+        Lanjut Pembayaran
+      </button>
+    </div><!-- /booking-card -->
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════ TOAST ════════════════════════════════ -->
+<div id="toast"></div>
+
+<!-- ════════════════════════════════ SCRIPT ══════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════════
+   KONFIGURASI — Ganti URL di bawah ini setelah
+   deploy Google Apps Script Anda
+════════════════════════════════════════════════ */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwvDsS7nBLTjUqpHVKL-28A9aOku-OCPzELMkJkqVg1xCQ203rslMv0OD8koGtu-z6Y/exec';
+
+/* ──────────── Navigasi halaman ──────────────── */
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  clearAlerts();
+}
+
+function clearAlerts() {
+  document.querySelectorAll('.alert').forEach(a => {
+    a.classList.remove('show');
+    a.textContent = '';
+  });
+}
+
+function showAlert(id, msg, type = 'error') {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'alert alert-' + type + ' show';
+}
+
+/* ──────────── Toast ─────────────────────────── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ──────────── State sesi ────────────────────── */
+function setUserSession(user) {
+  localStorage.setItem('stUser', JSON.stringify(user));
+  refreshNav();
+}
+
+function getUserSession() {
+  try { return JSON.parse(localStorage.getItem('stUser') || 'null'); }
+  catch { return null; }
+}
+
+function logout() {
+  localStorage.removeItem('stUser');
+  refreshNav();
+  showPage('login');
+  showToast('Anda berhasil keluar.');
+}
+
+function refreshNav() {
+  const user = getUserSession();
+  const navButtons = document.getElementById('navButtons');
+  const navUser    = document.getElementById('navUser');
+  const navName    = document.getElementById('navUserName');
+  if (user) {
+    navButtons.style.display = 'none';
+    navUser.style.display    = 'flex';
+    navName.textContent      = user.nama;
+    document.getElementById('bannerName').textContent  = user.nama;
+    document.getElementById('bannerEmail').textContent = user.email;
+    document.getElementById('userAvatar').textContent  = user.nama.charAt(0).toUpperCase();
+  } else {
+    navButtons.style.display = 'flex';
+    navUser.style.display    = 'none';
+  }
+}
+
+/* ──────────── Button loading state ─────────── */
+function setLoading(btnId, loading, defaultText) {
+  const btn = document.getElementById(btnId);
+  if (loading) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Memproses…';
+  } else {
+    btn.disabled = false;
+    btn.textContent = defaultText;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   POST ke Google Apps Script
+══════════════════════════════════════════════ */
+async function postToSheet(payload) {
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode:   'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+}
+
+/* ══════════════════════════════════════════════
+   GET dari Google Apps Script (dengan CORS)
+══════════════════════════════════════════════ */
+async function getFromSheet(params) {
+  const url = new URL(APPS_SCRIPT_URL);
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+  const res = await fetch(url.toString());
+  return await res.json();
+}
+
+/* ══════════════════════════════════════════════
+   DAFTAR
+══════════════════════════════════════════════ */
+async function doRegister() {
+  const nama       = document.getElementById('regNama').value.trim();
+  const telepon    = document.getElementById('regTelepon').value.trim();
+  const email      = document.getElementById('regEmail').value.trim();
+  const perusahaan = document.getElementById('regPerusahaan').value.trim();
+  const jabatan    = document.getElementById('regJabatan').value.trim();
+  const domisili   = document.getElementById('regDomisili').value.trim();
+  const password   = document.getElementById('regPassword').value;
+  const confirm    = document.getElementById('regConfirm').value;
+
+  if (!nama || !telepon || !email || !perusahaan || !jabatan || !domisili || !password || !confirm)
+    return showAlert('registerError', 'Semua kolom wajib diisi.');
+  if (password.length < 6)
+    return showAlert('registerError', 'Kata sandi minimal 6 karakter.');
+  if (password !== confirm)
+    return showAlert('registerError', 'Konfirmasi kata sandi tidak cocok.');
+
+  setLoading('btnRegister', true);
+
+  const newUser = {
+    action: 'newUser',
+    nama, telepon, email, perusahaan, jabatan, domisili,
+    password,
+    status: 'pending',
+    registeredAt: new Date().toISOString()
+  };
+
+  try {
+    await postToSheet(newUser);
+  } catch (_) { /* no-cors: error diabaikan */ }
+
+  setLoading('btnRegister', false, 'Buat Akun');
+  showAlert('registerSuccess',
+    '✓ Pendaftaran berhasil! Akun Anda sedang menunggu verifikasi admin. Anda dapat masuk setelah akun diverifikasi.',
+    'success');
+}
+
+/* ══════════════════════════════════════════════
+   MASUK — Status dicek langsung dari Google Sheet
+══════════════════════════════════════════════ */
+async function doLogin() {
+  const email    = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+
+  if (!email || !password)
+    return showAlert('loginError', 'Email dan kata sandi wajib diisi.');
+
+  setLoading('btnLogin', true);
+  showAlert('loginInfo', '⏳ Memverifikasi akun Anda…', 'info');
+
+  try {
+    // Cek langsung ke Google Sheet untuk mendapat status terkini
+    const result = await getFromSheet({ action: 'checkLogin', email, password });
+
+    setLoading('btnLogin', false, 'Masuk');
+    clearAlerts();
+
+    if (!result || result.error) {
+      return showAlert('loginError', result?.error || 'Terjadi kesalahan. Coba lagi.');
+    }
+
+    if (result.status === 'not_found') {
+      return showAlert('loginError', 'Email atau kata sandi salah.');
+    }
+
+    if (result.status === 'wrong_password') {
+      return showAlert('loginError', 'Email atau kata sandi salah.');
+    }
+
+    if (result.status === 'pending') {
+      return showAlert('loginError',
+        '⏳ Akun Anda masih menunggu verifikasi admin. Silakan coba lagi setelah akun diverifikasi.');
+    }
+
+    if (result.status === 'rejected') {
+      return showAlert('loginError',
+        '❌ Akun Anda ditolak oleh admin. Silakan hubungi kami untuk informasi lebih lanjut.');
+    }
+
+    if (result.status === 'verified') {
+      // Simpan data user ke sesi lokal
+      setUserSession({
+        nama:       result.nama,
+        email:      result.email,
+        telepon:    result.telepon,
+        perusahaan: result.perusahaan,
+        jabatan:    result.jabatan,
+        domisili:   result.domisili
+      });
+      showPage('booking');
+      showToast('Selamat datang, ' + result.nama + '!');
+    }
+
+  } catch (err) {
+    setLoading('btnLogin', false, 'Masuk');
+    clearAlerts();
+    showAlert('loginError', '⚠️ Tidak dapat terhubung ke server. Periksa koneksi internet Anda dan coba lagi.');
+  }
+}
+
+/* ══════════════════════════════════════════════
+   BOOKING
+══════════════════════════════════════════════ */
+async function doBooking() {
+  const user = getUserSession();
+  if (!user) return showPage('login');
+
+  const tipeTruk      = document.getElementById('tipeTruk').value;
+  const karoseri      = document.getElementById('karoseri').value;
+  const lokasiMuat    = document.getElementById('lokasiMuat').value.trim();
+  const lokasiBongkar = document.getElementById('lokasiBongkar').value.trim();
+  const jenisBarang   = document.getElementById('jenisBarang').value.trim();
+  const tonase        = document.getElementById('tonase').value.trim();
+  const biayaMuat     = document.getElementById('biayaMuat').value.trim();
+  const biayaBongkar  = document.getElementById('biayaBongkar').value.trim();
+  const harga         = document.getElementById('harga').value.trim();
+  const catatan       = document.getElementById('catatan').value.trim();
+
+  if (!tipeTruk || !karoseri || !lokasiMuat || !lokasiBongkar || !jenisBarang || !tonase || !harga)
+    return showAlert('bookingError', 'Mohon lengkapi semua kolom yang wajib diisi.');
+
+  setLoading('btnBooking', true);
+
+  const booking = {
+    action: 'newTruckBooking',
+    bookingNumber: 'TRK' + Date.now(),
+    waktu: new Date().toLocaleString('id-ID'),
+    nama:    user.nama,
+    email:   user.email,
+    telepon: user.telepon,
+    tipeTruk, karoseri,
+    lokasiMuat, lokasiBongkar,
+    jenisBarang, tonase,
+    biayaMuat:      biayaMuat || '-',
+    biayaBongkar:   biayaBongkar || '-',
+    hargaPenawaran: harga,
+    catatan,
+    status: 'Menunggu Pembayaran'
+  };
+
+  try {
+    await postToSheet(booking);
+  } catch (_) {}
+
+  setLoading('btnBooking', false, 'Lanjut Pembayaran');
+  showAlert('bookingSuccess', '✓ Pemesanan berhasil dikirim! Nomor booking: ' + booking.bookingNumber, 'success');
+  showToast('Pemesanan dikirim!');
+
+  // Uncomment baris berikut jika halaman payment sudah ada:
+  // setTimeout(() => location.href = 'payment-truk.html', 2000);
+}
+
+/* ══════════════════════════════════════════════
+   INISIALISASI
+══════════════════════════════════════════════ */
+(function init() {
+  refreshNav();
+  const user = getUserSession();
+  if (user) {
+    showPage('booking');
+  } else {
+    showPage('login');
+  }
+})();
+</script>
+</body>
+</html>
+    /* ── NAVBAR ─────────────────────────────────── */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .navbar-logo {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .navbar-logo svg { width: 20px; height: 20px; fill: white; }
+    .navbar-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--gray-800);
+    }
+    .navbar-name span { color: var(--orange); }
+    .navbar-right { display: flex; gap: 10px; align-items: center; }
+
     /* ── BUTTONS ────────────────────────────────── */
     .btn {
       font-family: inherit;
