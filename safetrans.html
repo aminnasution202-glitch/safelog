@@ -645,7 +645,7 @@
                        : "badge-busy";
 
       const waNumber = noWA.replace(/\D/g, "");
-      const waMsg    = encodeURIComponent(`Halo, saya tertarik dengan unit truk *${unit}* (${karoseri}) rute ${origin} → ${tujuan}. Apakah masih tersedia?`);
+      const waMsg    = encodeURIComponent(`Halo, saya tertarik dengan muatan *${unit}* (${karoseri}) rute ${origin} → ${tujuan}. Apakah masih tersedia?`);
       const waLink   = `https://wa.me/${waNumber.startsWith("0") ? "62" + waNumber.slice(1) : waNumber}?text=${waMsg}`;
 
       return { unit, karoseri, origin, tujuan, tonase, ket, waNumber, waLink, badgeClass };
