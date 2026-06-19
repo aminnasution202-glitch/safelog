@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SafeTrans Jobs — Loker Sopir & Logistik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================= TOKENS ============================= */
+:root{
+  --ink:#11151C;
+  --ink-soft:#3A4150;
+  --slate:#6B7280;
+  --slate-light:#9AA3AF;
+  --cloud:#F2F5F8;
+  --surface:#FFFFFF;
+  --line:#E4E9EE;
+  --blue:#F2622B;
+  --blue-dark:#C94A1C;
+  --blue-soft:#FDE7DC;
+  --amber:#FFB020;
+  --amber-soft:#FFF4DE;
+  --amber-deep:#B97200;
+  --teal:#1B9E6B;
+  --teal-soft:#E1F7EE;
+  --red:#E0473F;
+  --red-soft:#FBE7E6;
+
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:11px;
+  --radius-pill:999px;
+
+  --shadow-sm:0 1px 2px rgba(17,21,28,.05), 0 1px 1px rgba(17,21,28,.04);
+  --shadow-md:0 10px 24px -6px rgba(17,21,28,.10), 0 2px 6px rgba(17,21,28,.04);
+  --shadow-lg:0 22px 48px -12px rgba(17,21,28,.18);
+
+  --font-display:'Space Grotesk', 'Inter', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+
+  --header-h:64px;
+  --nav-h:64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font-body);
+  background:var(--cloud);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+button{font-family:inherit;cursor:pointer;}
+input{font-family:inherit;}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important; transition-duration:.001s !important;}
+}
+
+/* ============================= APP SHELL ============================= */
+#app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  background:var(--cloud);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky; top:0; z-index:40;
+  background:var(--ink);
+  color:#fff;
+  padding:10px 16px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.header-row{
+  display:flex; align-items:center; gap:10px;
+  height:46px;
+}
+.brand{
+  display:flex; align-items:center; gap:8px;
+  flex:0 0 auto;
+}
+.brand-mark{
+  width:30px;height:30px;border-radius:9px;
+  background:linear-gradient(135deg, var(--blue), #FF9A56);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:14px; color:#fff;
+  box-shadow:0 4px 10px rgba(242,98,43,.4);
+}
+.category-select{
+  flex:1 1 auto;
+  display:flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius-pill);
+  padding:8px 12px;
+  color:#fff;
+  font-size:13px; font-weight:600;
+  font-family:var(--font-body);
+  min-width:0;
+  position:relative;
+}
+.category-select span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.category-select svg{flex:0 0 auto; transition:transform .25s ease;}
+.category-select.open svg{transform:rotate(180deg);}
+.icon-btn{
+  flex:0 0 auto;
+  width:38px;height:38px;
+  border-radius:var(--radius-pill);
+  border:none;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  transition:background .2s, transform .15s;
+}
+.icon-btn:active{transform:scale(.92); background:rgba(255,255,255,.16);}
+
+.search-wrap{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .28s cubic-bezier(.4,0,.2,1), padding .28s;
+}
+.search-wrap.open{ max-height:56px; padding-bottom:10px;}
+.search-box{
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.1);
+  border-radius:var(--radius-pill);
+  padding:9px 14px;
+  margin-top:8px;
+}
+.search-box input{
+  flex:1; background:none; border:none; outline:none;
+  color:#fff; font-size:14px;
+}
+.search-box input::placeholder{color:rgba(255,255,255,.5);}
+.search-box svg{color:rgba(255,255,255,.6); flex:0 0 auto;}
+
+.dropdown-panel{
+  position:absolute; top:64px; left:16px;
+  background:var(--surface); color:var(--ink);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-lg);
+  width:min(260px, calc(100% - 32px));
+  padding:6px;
+  z-index:50;
+  opacity:0; transform:translateY(-6px) scale(.98);
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+.dropdown-panel.show{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+.dropdown-item{
+  padding:10px 12px; border-radius:var(--radius-sm);
+  font-size:14px; font-weight:500; color:var(--ink-soft);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.dropdown-item:active{background:var(--cloud);}
+.dropdown-item.active{background:var(--blue-soft); color:var(--blue-dark); font-weight:600;}
+
+/* ---------- Filter bar ---------- */
+.filter-bar{
+  display:flex; align-items:center; gap:8px;
+  padding:10px 16px;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:sticky; top:var(--header-h); z-index:25;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.filter-bar::-webkit-scrollbar{display:none;}
+.filter-chip{
+  flex:0 0 auto;
+  display:flex; align-items:center; gap:6px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  padding:7px 12px;
+  border-radius:var(--radius-pill);
+  font-size:12.5px; font-weight:600; color:var(--ink-soft);
+  transition:border-color .15s, color .15s, background .15s;
+}
+.filter-chip.primary{
+  border:none; background:var(--ink); color:#fff;
+}
+.filter-chip.active{ border-color:var(--blue); color:var(--blue-dark); background:var(--blue-soft);}
+.filter-chip svg{flex:0 0 auto;}
+.result-count{
+  margin-left:auto; flex:0 0 auto;
+  font-size:12px; color:var(--slate-light); font-weight:500;
+}
+
+/* ---------- Demo banner ---------- */
+.demo-banner{
+  margin:10px 16px 0;
+  background:var(--amber-soft);
+  border:1px solid #FFE2A8;
+  color:var(--amber-deep);
+  font-size:12px; font-weight:600;
+  padding:9px 12px;
+  border-radius:var(--radius-sm);
+  display:flex; align-items:center; gap:8px;
+}
+.demo-banner button{
+  margin-left:auto; background:none; border:none; color:var(--amber-deep);
+  font-weight:700; font-size:12px; opacity:.7;
+}
+
+/* ---------- List ---------- */
+.list-view{
+  flex:1;
+  padding:14px 16px calc(var(--nav-h) + var(--safe-b) + 24px);
+}
+.section-label{
+  font-family:var(--font-display);
+  font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--slate-light); font-weight:700;
+  margin:18px 2px 10px;
+}
+
+/* ---------- Job Card (ticket motif) ---------- */
+.job-card{
+  background:var(--surface);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  margin-bottom:14px;
+  padding:16px 16px 14px;
+  position:relative;
+  border:1px solid var(--line);
+  opacity:0; transform:translateY(14px);
+  animation:cardIn .45s cubic-bezier(.2,.7,.3,1) forwards;
+  transition:box-shadow .2s, transform .15s;
+}
+.job-card:active{ transform:translateY(0) scale(.985); }
+@keyframes cardIn{ to{ opacity:1; transform:translateY(0);} }
+
+.card-top{
+  display:flex; align-items:flex-start; gap:6px;
+  margin-bottom:12px;
+}
+.badge{
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:11px; font-weight:700;
+  padding:4px 8px; border-radius:var(--radius-pill);
+}
+.badge-verified{ background:var(--teal-soft); color:var(--teal);}
+.badge-urgent{ background:var(--amber-soft); color:var(--amber-deep);}
+.badge-urgent svg{ animation:pulseBolt 1.8s ease-in-out infinite;}
+@keyframes pulseBolt{ 0%,100%{opacity:1;} 50%{opacity:.55;} }
+
+.bookmark-btn{
+  margin-left:auto;
+  width:32px;height:32px; flex:0 0 auto;
+  border:none; background:var(--cloud); border-radius:var(--radius-pill);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--slate);
+  transition:background .15s, color .15s, transform .15s;
+}
+.bookmark-btn.saved{ background:var(--blue-soft); color:var(--blue);}
+.bookmark-btn:active{ transform:scale(.88);}
+
+.card-main{
+  display:flex; gap:12px;
+  margin-bottom:12px;
+}
+.company-logo{
+  width:48px;height:48px; border-radius:14px; flex:0 0 auto;
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:17px;
+}
+.job-title{
+  font-family:var(--font-display);
+  font-size:16px; font-weight:700; color:var(--ink);
+  line-height:1.25; margin:0 0 3px;
+}
+.company-name{
+  font-size:13px; color:var(--slate); font-weight:500;
+  display:flex; align-items:center; gap:4px;
+}
+.company-name svg{ color:var(--teal); flex:0 0 auto;}
+
+.route-line{
+  display:flex; align-items:center; gap:6px;
+  font-size:12.5px; color:var(--slate); font-weight:500;
+  margin-bottom:12px;
+}
+.route-line .dash{
+  flex:0 0 26px; height:1px;
+  background:repeating-linear-gradient(to right, var(--slate-light) 0 4px, transparent 4px 7px);
+}
+.route-line svg{ flex:0 0 auto; color:var(--slate-light);}
+
+.tag-row{
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;
+}
+.tag{
+  font-size:11.5px; font-weight:600; color:var(--ink-soft);
+  background:var(--cloud); padding:5px 10px; border-radius:var(--radius-pill);
+}
+
+.salary-strip{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--ink); border-radius:var(--radius-sm);
+  padding:10px 12px; margin-bottom:12px;
+}
+.salary-value{
+  font-family:var(--font-mono); font-weight:600; font-size:14px;
+  color:var(--amber); letter-spacing:.01em;
+}
+.salary-period{ font-size:10.5px; color:rgba(255,255,255,.5); font-weight:600; text-transform:uppercase; letter-spacing:.04em;}
+
+.recruiter-row{
+  display:flex; align-items:center; gap:8px; margin-bottom:14px;
+}
+.recruiter-avatar{
+  width:24px;height:24px;border-radius:var(--radius-pill);
+  background:var(--blue-soft); color:var(--blue-dark);
+  font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+}
+.recruiter-text{ font-size:12px; color:var(--slate); }
+.recruiter-text b{ color:var(--ink-soft); font-weight:600;}
+.posted-time{ margin-left:auto; font-size:11.5px; color:var(--slate-light);}
+
+.apply-btn{
+  width:100%; border:none; border-radius:var(--radius-pill);
+  background:var(--blue); color:#fff;
+  font-size:14.5px; font-weight:700;
+  padding:13px; display:flex; align-items:center; justify-content:center; gap:6px;
+  box-shadow:0 8px 18px -4px rgba(242,98,43,.45);
+  transition:background .15s, transform .12s;
+  text-decoration:none; box-sizing:border-box;
+}
+.apply-btn:active{ background:var(--blue-dark); transform:scale(.98);}
+.apply-btn svg{ transition:transform .15s;}
+.apply-btn:active svg{ transform:translateX(2px);}
+
+/* ---------- Skeletons ---------- */
+.skeleton-card{
+  background:var(--surface); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm); padding:16px; margin-bottom:14px; border:1px solid var(--line);
+}
+.sk-row{ display:flex; gap:12px; margin-bottom:14px;}
+.sk-box{
+  border-radius:14px;
+  background:linear-gradient(100deg, #ECEFF3 30%, #F6F8FA 50%, #ECEFF3 70%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s ease-in-out infinite;
+}
+@keyframes shimmer{ 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+.sk-logo{ width:48px;height:48px; border-radius:14px;}
+.sk-lines{ flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center;}
+.sk-line{ height:11px; border-radius:6px;}
+.sk-full{ height:38px; border-radius:11px; margin-bottom:12px;}
+.sk-btn{ height:42px; border-radius:999px;}
+
+/* ---------- Empty state ---------- */
+.empty-state{
+  text-align:center; padding:60px 24px 40px; color:var(--slate);
+}
+.empty-state svg{ color:var(--slate-light); margin-bottom:14px;}
+.empty-state h3{
+  font-family:var(--font-display); color:var(--ink); margin:0 0 6px; font-size:16px;
+}
+.empty-state p{ font-size:13px; margin:0; line-height:1.5;}
+
+/* ============================= DETAIL VIEW ============================= */
+.detail-view{
+  position:fixed; inset:0; max-width:480px; margin:0 auto;
+  background:var(--cloud);
+  transform:translateX(100%);
+  transition:transform .32s cubic-bezier(.22,.61,.36,1);
+  z-index:100; overflow-y:auto;
+  display:flex; flex-direction:column;
+}
+.detail-view.show{ transform:translateX(0); }
+
+.detail-header{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px;
+  padding:14px 16px;
+  background:linear-gradient(180deg, rgba(17,21,28,.55), rgba(17,21,28,0));
+}
+.detail-header .icon-btn{ background:rgba(255,255,255,.18); backdrop-filter:blur(6px);}
+.detail-header .spacer{ flex:1;}
+
+.detail-hero{
+  background:var(--ink);
+  padding:0 20px 26px; margin-top:-56px; padding-top:56px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.detail-hero::after{
+  content:''; position:absolute; right:-40px; top:-40px; width:180px; height:180px;
+  border-radius:50%; background:radial-gradient(circle, rgba(242,98,43,.35), transparent 70%);
+}
+.detail-logo{
+  width:58px;height:58px;border-radius:16px;
+  background:linear-gradient(135deg, var(--blue), #FF9A56);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:21px; color:#fff;
+  margin-bottom:14px; position:relative; z-index:1;
+}
+.detail-title{ font-family:var(--font-display); font-size:21px; font-weight:700; margin:0 0 6px; position:relative; z-index:1;}
+.detail-company{ display:flex; align-items:center; gap:6px; font-size:13.5px; color:rgba(255,255,255,.75); font-weight:500; position:relative; z-index:1;}
+.detail-company svg{ color:var(--teal);}
+.detail-meta-row{
+  display:flex; gap:14px; margin-top:14px; position:relative; z-index:1;
+  font-size:12px; color:rgba(255,255,255,.65);
+}
+.detail-meta-row span{ display:flex; align-items:center; gap:5px;}
+
+.stat-strip{
+  display:flex; gap:10px; padding:16px; margin-top:-16px; position:relative; z-index:2;
+  overflow-x:auto; scrollbar-width:none;
+}
+.stat-strip::-webkit-scrollbar{display:none;}
+.stat-pill{
+  flex:0 0 auto; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius-md); padding:10px 14px; box-shadow:var(--shadow-sm);
+  min-width:108px;
+}
+.stat-pill .lbl{ font-size:10px; color:var(--slate-light); font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px;}
+.stat-pill .val{ font-size:13.5px; font-weight:700; color:var(--ink); font-family:var(--font-mono);}
+.stat-pill.salary{ background:var(--ink); border:none;}
+.stat-pill.salary .lbl{ color:rgba(255,255,255,.5);}
+.stat-pill.salary .val{ color:var(--amber);}
+
+.detail-section{
+  background:var(--surface); margin:0 16px 14px; padding:18px;
+  border-radius:var(--radius-lg); border:1px solid var(--line); box-shadow:var(--shadow-sm);
+}
+.detail-section h4{
+  font-family:var(--font-display); font-size:14.5px; margin:0 0 12px; color:var(--ink);
+  display:flex; align-items:center; gap:7px;
+}
+.detail-section p{ font-size:13.5px; line-height:1.65; color:var(--ink-soft); margin:0;}
+.req-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.req-list li{ display:flex; gap:9px; font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+.req-list svg{ flex:0 0 auto; color:var(--teal); margin-top:2px;}
+.benefit-row{ display:flex; gap:8px; flex-wrap:wrap;}
+
+.company-card{ display:flex; align-items:center; gap:12px;}
+.company-card .logo-sm{ width:44px;height:44px;border-radius:13px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700;}
+.company-card .info{ flex:1;}
+.company-card .info .name{ font-weight:700; font-size:14px; display:flex; align-items:center; gap:5px;}
+.company-card .info .name svg{color:var(--teal);}
+.company-card .info .rating{ font-size:12px; color:var(--slate); display:flex; align-items:center; gap:4px; margin-top:3px;}
+.company-card .info .rating svg{ color:var(--amber); width:13px; height:13px;}
+
+.recruiter-card{ display:flex; align-items:center; gap:12px;}
+.recruiter-card .av{
+  width:46px;height:46px;border-radius:var(--radius-pill); background:var(--blue-soft); color:var(--blue-dark);
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex:0 0 auto;
+}
+.recruiter-card .info{ flex:1;}
+.recruiter-card .info .name{ font-weight:700; font-size:14px;}
+.recruiter-card .info .role{ font-size:12px; color:var(--slate); margin-top:2px;}
+
+.detail-sticky-bar{
+  position:sticky; bottom:0; z-index:10;
+  background:var(--surface); border-top:1px solid var(--line);
+  padding:12px 16px calc(12px + var(--safe-b));
+  display:flex; gap:10px; margin-top:auto;
+  box-shadow:0 -8px 20px rgba(17,21,28,.06);
+}
+.save-toggle-btn{
+  width:48px; height:48px; flex:0 0 auto; border-radius:var(--radius-md);
+  border:1.5px solid var(--line); background:var(--surface);
+  display:flex; align-items:center; justify-content:center; color:var(--slate);
+}
+.save-toggle-btn.saved{ border-color:var(--blue); color:var(--blue); background:var(--blue-soft);}
+.detail-sticky-bar .apply-btn{ flex:1; padding:14px;}
+
+/* ============================= FILTER SHEET ============================= */
+.sheet-overlay{
+  position:fixed; inset:0; background:rgba(17,21,28,.5);
+  z-index:200; opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.sheet-overlay.show{ opacity:1; pointer-events:auto;}
+.filter-sheet{
+  position:fixed; left:0; right:0; bottom:0; max-width:480px; margin:0 auto;
+  background:var(--surface); border-radius:24px 24px 0 0;
+  z-index:201; max-height:86vh; display:flex; flex-direction:column;
+  transform:translateY(100%); transition:transform .32s cubic-bezier(.22,.61,.36,1);
+  box-shadow:var(--shadow-lg);
+}
+.filter-sheet.show{ transform:translateY(0);}
+.sheet-handle{ width:36px; height:4px; background:var(--line); border-radius:4px; margin:10px auto 4px;}
+.sheet-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px 14px; border-bottom:1px solid var(--line);
+}
+.sheet-header h3{ font-family:var(--font-display); font-size:17px; margin:0;}
+.sheet-body{ padding:18px; overflow-y:auto; flex:1;}
+.filter-group{ margin-bottom:22px;}
+.filter-group .lbl{ font-size:12.5px; font-weight:700; color:var(--ink-soft); margin-bottom:10px; text-transform:uppercase; letter-spacing:.03em;}
+.chip-grid{ display:flex; flex-wrap:wrap; gap:8px;}
+.opt-chip{
+  border:1.5px solid var(--line); background:var(--surface); color:var(--ink-soft);
+  padding:8px 14px; border-radius:var(--radius-pill); font-size:13px; font-weight:600;
+  transition:all .15s;
+}
+.opt-chip.active{ border-color:var(--blue); background:var(--blue-soft); color:var(--blue-dark);}
+.range-display{ display:flex; justify-content:space-between; font-size:13px; font-weight:700; color:var(--ink); margin-bottom:8px; font-family:var(--font-mono);}
+input[type="range"]{
+  width:100%; height:5px; border-radius:4px; background:var(--line); appearance:none; outline:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  appearance:none; width:22px; height:22px; border-radius:50%; background:var(--blue);
+  border:3px solid #fff; box-shadow:0 2px 6px rgba(242,98,43,.5); cursor:pointer;
+}
+.toggle-row{ display:flex; align-items:center; justify-content:space-between;}
+.toggle-row .lbl{ margin-bottom:0; text-transform:none; font-size:13.5px; color:var(--ink);}
+.switch{ position:relative; width:44px; height:26px; border-radius:999px; background:var(--line); flex:0 0 auto; transition:background .2s;}
+.switch::after{ content:''; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.2); transition:transform .2s;}
+.switch.on{ background:var(--blue);}
+.switch.on::after{ transform:translateX(18px);}
+.select-pill{
+  width:100%; border:1.5px solid var(--line); border-radius:var(--radius-md); padding:11px 14px;
+  font-size:13.5px; font-weight:600; color:var(--ink); background:var(--surface);
+  appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat; background-position:right 14px center;
+}
+.sheet-footer{
+  display:flex; gap:10px; padding:14px 18px calc(14px + var(--safe-b));
+  border-top:1px solid var(--line);
+}
+.reset-btn{
+  flex:0 0 auto; border:1.5px solid var(--line); background:var(--surface); color:var(--ink-soft);
+  border-radius:var(--radius-pill); padding:13px 18px; font-size:14px; font-weight:700;
+}
+.sheet-footer .apply-btn{ flex:1;}
+
+/* ============================= BOTTOM NAV ============================= */
+.bottom-nav{
+  position:fixed; left:0; right:0; bottom:0; max-width:480px; margin:0 auto;
+  background:var(--surface); border-top:1px solid var(--line);
+  display:flex; z-index:60;
+  padding-bottom:var(--safe-b);
+}
+.nav-item{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  border:none; background:none; padding:10px 0 8px; color:var(--slate-light);
+  font-size:10.5px; font-weight:600;
+}
+.nav-item.active{ color:var(--blue);}
+
+/* page placeholder views */
+.placeholder-view{ padding:50px 28px; text-align:center; flex:1;}
+.placeholder-view svg{ color:var(--slate-light); margin-bottom:16px;}
+.placeholder-view h3{ font-family:var(--font-display); margin:0 0 8px; font-size:17px;}
+.placeholder-view p{ font-size:13.5px; color:var(--slate); line-height:1.6; margin:0;}
+
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header">
+    <div class="header-row">
+      <div class="brand"><div class="brand-mark">ST</div></div>
+      <button class="category-select" id="categoryBtn">
+        <span id="categoryLabel">Semua Kategori</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <button class="icon-btn" id="searchToggle" aria-label="Cari loker">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+    <div class="search-wrap" id="searchWrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Cari posisi, perusahaan, kota...">
+      </div>
+    </div>
+  </header>
+  <div class="dropdown-panel" id="categoryPanel"></div>
+
+  <!-- ===================== FILTER BAR ===================== -->
+  <div class="filter-bar">
+    <button class="filter-chip primary" id="openFilters">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      Filter
+    </button>
+    <button class="filter-chip" id="sortChip">Terbaru</button>
+    <span class="result-count" id="resultCount"></span>
+  </div>
+
+  <!-- ===================== LIST VIEW ===================== -->
+  <main class="list-view" id="listView"></main>
+
+  <!-- ===================== BOTTOM NAV ===================== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-nav="home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+      Beranda
+    </button>
+    <button class="nav-item" data-nav="search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Cari
+    </button>
+  </nav>
+</div>
+
+<!-- ===================== JOB DETAIL VIEW ===================== -->
+<div class="detail-view" id="detailView"></div>
+
+<!-- ===================== FILTER SHEET ===================== -->
+<div class="sheet-overlay" id="sheetOverlay"></div>
+<div class="filter-sheet" id="filterSheet"></div>
+
+<script>
+/* =========================================================================
+   SAFETRANS JOBS — APP CONFIG
+   -------------------------------------------------------------------------
+   To go live with real data:
+   1. Deploy the companion Google Apps Script (Code.gs) as a Web App
+      (Execute as: Me, Who has access: Anyone).
+   2. Paste the deployment URL below into SCRIPT_URL.
+   3. The sheet must have a header row matching the field names used in
+      DEMO_JOBS below (title, company, salaryMin, salaryMax, tags, etc).
+   If SCRIPT_URL is empty or unreachable, the app automatically falls back
+   to demo data so the UI is always explorable.
+   ========================================================================= */
+const CONFIG = {
+  SCRIPT_URL: "", // e.g. "https://script.google.com/macros/s/AKfycb.../exec"
+  FETCH_TIMEOUT_MS: 6000,
+};
+
+/* ---------------------------- ICONS ---------------------------- */
+const ICON = {
+  bolt:'<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-13h-8l1-7Z"/></svg>',
+  shield:'<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/></svg>',
+  pin:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>',
+  bookmark:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 4h12v17l-6-4-6 4Z"/></svg>',
+  bookmarkFilled:'<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h12v17l-6-4-6 4Z"/></svg>',
+  arrowRight:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>',
+  back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><polyline points="15 18 9 12 15 6"/></svg>',
+  share:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>',
+  star:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .7-5.3 4.7L18.5 22 12 17.8 5.5 22l1.8-7.6L2 9.7 9 9z"/></svg>',
+  check:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="20 6 9 17 4 12"/></svg>',
+  briefcase:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  clock:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>',
+  inbox:'<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="m5.45 5.11 1.5-3A2 2 0 0 1 8.74 1h6.52a2 2 0 0 1 1.8 1.11l1.49 3"/><rect x="2" y="12" width="20" height="9" rx="2"/></svg>',
+  search:'<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+  x:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  whatsapp:'<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.1-.5-.1-.2-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.1 1.7 2.6 4.2 3.6 2.1.8 2.5.7 3 .6.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z"/><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm0 18.2a8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>',
+};
+
+/* ---------------------------- DEMO DATA ---------------------------- */
+const DEMO_JOBS = [
+  {id:1, title:"Sopir Truk Tronton", company:"Lintas Nusantara Logistik", logo:"LN", whatsapp:"6281234500001", verified:true, urgent:true,
+   category:"Sopir Truk", location:"Cikarang, Jawa Barat", distanceKm:4.2, salaryMin:6500000, salaryMax:8500000,
+   jobType:"Penuh Waktu", experience:"3+ Tahun", tags:["SIM B2 Umum","Rute Antar Kota","BPJS"], postedHoursAgo:2,
+   recruiter:{name:"Pak Surya", role:"HR Recruiter", avatar:"SU"},
+   description:"Mengemudikan truk tronton untuk pengiriman muatan antar kota Jabodetabek - Jawa Tengah secara rutin. Bertanggung jawab atas keselamatan muatan dan ketepatan waktu pengiriman.",
+   requirements:["Memiliki SIM B2 Umum aktif","Pengalaman minimal 3 tahun sebagai sopir truk besar","Memahami rute Pulau Jawa","Sehat jasmani & rohani, bebas narkoba"],
+   benefits:["BPJS Kesehatan","BPJS Ketenagakerjaan","Uang Makan","Bonus Ketepatan Waktu"],
+   companyDesc:"Perusahaan ekspedisi dengan lebih dari 200 unit truk yang melayani rute Jawa-Sumatra sejak 2009.", rating:4.6},
+
+  {id:2, title:"Driver Box Antar Kota", company:"SafeTrans Ekspedisi", logo:"ST", whatsapp:"6281234500002", verified:true, urgent:false,
+   category:"Driver Box", location:"Surabaya, Jawa Timur", distanceKm:1.1, salaryMin:5200000, salaryMax:6800000,
+   jobType:"Penuh Waktu", experience:"1-2 Tahun", tags:["SIM B1 Umum","Mobil Box","Harian"], postedHoursAgo:6,
+   recruiter:{name:"Bu Rina", role:"Talent Acquisition", avatar:"RI"},
+   description:"Mengantarkan barang menggunakan mobil box untuk rute dalam dan luar kota Surabaya. Jadwal kerja shift dengan estimasi 6 pengantaran per hari.",
+   requirements:["SIM B1 Umum aktif minimal 1 tahun","Mengenal jalur Surabaya - Malang - Jember","Jujur dan disiplin waktu","Mampu bekerja dengan checklist digital"],
+   benefits:["Uang Bensin","Insentif Harian","Seragam Kerja"],
+   companyDesc:"Unit armada milik SafeTrans yang fokus pada distribusi cepat skala regional Jawa Timur.", rating:4.8},
+
+  {id:3, title:"Kurir Motor Same Day", company:"Kilat Ekspres", logo:"KE", whatsapp:"6281234500003", verified:false, urgent:true,
+   category:"Kurir", location:"Bandung, Jawa Barat", distanceKm:2.8, salaryMin:3200000, salaryMax:4500000,
+   jobType:"Harian", experience:"Tidak Perlu Pengalaman", tags:["SIM C","Motor Sendiri","Fleksibel"], postedHoursAgo:1,
+   recruiter:{name:"Pak Dedi", role:"Koordinator Lapangan", avatar:"DE"},
+   description:"Mengantar paket same-day di area Bandung Raya menggunakan motor pribadi. Order diberikan melalui aplikasi internal setiap pagi.",
+   requirements:["Memiliki SIM C dan motor sendiri","Mengenal jalan-jalan kota Bandung","Memiliki smartphone Android"],
+   benefits:["Bonus Performa","Uang Bensin Harian","Jam Kerja Fleksibel"],
+   companyDesc:"Layanan kurir lokal yang berfokus pada pengantaran same-day di kota-kota besar Jawa Barat.", rating:4.2},
+
+  {id:4, title:"Operator Forklift Gudang", company:"Gudang Maju Bersama", logo:"GM", whatsapp:"6281234500004", verified:true, urgent:false,
+   category:"Gudang", location:"Tangerang, Banten", distanceKm:7.5, salaryMin:4800000, salaryMax:5600000,
+   jobType:"Penuh Waktu", experience:"1-2 Tahun", tags:["Sertifikat Forklift","Shift","Gudang Dingin"], postedHoursAgo:14,
+   recruiter:{name:"Pak Anto", role:"Warehouse Supervisor", avatar:"AN"},
+   description:"Mengoperasikan forklift untuk bongkar muat barang di gudang distribusi pusat, termasuk pencatatan stok masuk dan keluar.",
+   requirements:["Memiliki sertifikat operator forklift","Pengalaman kerja gudang minimal 1 tahun","Bersedia kerja shift bergilir"],
+   benefits:["BPJS Kesehatan","Tunjangan Shift Malam","Makan Siang Gratis"],
+   companyDesc:"Pusat distribusi multi-klien yang melayani kebutuhan logistik FMCG di wilayah Banten.", rating:4.4},
+
+  {id:5, title:"Sopir Pickup Mitra Lepas", company:"Rantai Cepat Logistics", logo:"RC", whatsapp:"6281234500005", verified:true, urgent:true,
+   category:"Sopir Truk", location:"Semarang, Jawa Tengah", distanceKm:3.4, salaryMin:4500000, salaryMax:7000000,
+   jobType:"Kontrak / Mitra", experience:"Tidak Perlu Pengalaman", tags:["SIM B1","Sistem Mitra","Bonus Trip"], postedHoursAgo:3,
+   recruiter:{name:"Bu Sari", role:"Partner Relations", avatar:"SA"},
+   description:"Bergabung sebagai mitra pengemudi pickup untuk distribusi barang ritel area Semarang dan sekitarnya, dengan skema bagi hasil per trip.",
+   requirements:["Memiliki SIM B1, kendaraan disediakan perusahaan","Berdomisili area Semarang","Dapat memulai kerja secepatnya"],
+   benefits:["Bonus Per Trip","Asuransi Kecelakaan Kerja","Pelatihan Gratis"],
+   companyDesc:"Platform logistik berbasis mitra yang menghubungkan pengemudi lepas dengan UMKM ritel.", rating:4.3},
+
+  {id:6, title:"Helper & Loading Crew", company:"SafeTrans Ekspedisi", logo:"ST", whatsapp:"6281234500006", verified:true, urgent:false,
+   category:"Gudang", location:"Surabaya, Jawa Timur", distanceKm:1.1, salaryMin:3800000, salaryMax:4400000,
+   jobType:"Penuh Waktu", experience:"Tidak Perlu Pengalaman", tags:["Fisik Kuat","Tim Loading","Shift Pagi"], postedHoursAgo:20,
+   recruiter:{name:"Bu Rina", role:"Talent Acquisition", avatar:"RI"},
+   description:"Membantu proses bongkar muat barang ke dalam truk dan menjaga kerapihan penyusunan kargo sesuai standar keselamatan.",
+   requirements:["Fisik sehat dan kuat mengangkat beban","Dapat bekerja dalam tim","Disiplin terhadap SOP keselamatan"],
+   benefits:["BPJS Ketenagakerjaan","Uang Makan","Seragam & APD"],
+   companyDesc:"Unit armada milik SafeTrans yang fokus pada distribusi cepat skala regional Jawa Timur.", rating:4.8},
+
+  {id:7, title:"Sopir Truk Engkel Harian", company:"Mitra Angkutan Jaya", logo:"MA", whatsapp:"6281234500007", verified:false, urgent:false,
+   category:"Sopir Truk", location:"Yogyakarta", distanceKm:5.9, salaryMin:3900000, salaryMax:4700000,
+   jobType:"Harian", experience:"1-2 Tahun", tags:["SIM B1","Truk Engkel","Rute Lokal"], postedHoursAgo:30,
+   recruiter:{name:"Pak Yusuf", role:"Operations Lead", avatar:"YU"},
+   description:"Mengemudikan truk engkel untuk distribusi barang kebutuhan harian ke toko-toko mitra di wilayah DIY.",
+   requirements:["SIM B1 Umum aktif","Mengenal wilayah Yogyakarta & sekitarnya","Komunikatif dengan pemilik toko"],
+   benefits:["Uang Harian","Bonus Kehadiran"],
+   companyDesc:"Penyedia jasa angkutan barang skala kecil-menengah untuk wilayah Yogyakarta dan Jawa Tengah.", rating:4.0},
+
+  {id:8, title:"Driver Box Pendingin (Reefer)", company:"Cold Chain Indonesia", logo:"CC", whatsapp:"6281234500008", verified:true, urgent:true,
+   category:"Driver Box", location:"Bekasi, Jawa Barat", distanceKm:6.3, salaryMin:7000000, salaryMax:9200000,
+   jobType:"Penuh Waktu", experience:"3+ Tahun", tags:["SIM B2","Reefer Truck","Produk Segar"], postedHoursAgo:5,
+   recruiter:{name:"Bu Maya", role:"Fleet HR", avatar:"MA"},
+   description:"Mengemudikan truk box berpendingin (reefer) untuk distribusi produk makanan segar dan beku ke jaringan ritel modern.",
+   requirements:["SIM B2 Umum aktif minimal 3 tahun","Memahami pengoperasian unit pendingin truk","Pengalaman distribusi cold chain diutamakan"],
+   benefits:["BPJS Kesehatan & Ketenagakerjaan","Tunjangan Resiko","Bonus Suhu Aman"],
+   companyDesc:"Spesialis distribusi rantai dingin (cold chain) untuk produk segar dan beku di Jabodetabek.", rating:4.7},
+];
+
+const CATEGORIES = ["Semua Kategori","Sopir Truk","Driver Box","Ekspedisi","Gudang","Kurir","Alat Berat"];
+
+/* ---------------------------- STATE ---------------------------- */
+const state = {
+  jobs: [],
+  loading: true,
+  usingDemo: false,
+  demoBannerDismissed: false,
+  activeCategory: "Semua Kategori",
+  searchQuery: "",
+  saved: new Set(),
+  currentNav: "home",
+  detailJobId: null,
+  filters: {
+    categories: [],
+    jobTypes: [],
+    experience: [],
+    minSalary: 0,
+    urgentOnly: false,
+    sort: "Terbaru",
+  },
+};
+
+const fmtIDR = n => "Rp " + n.toLocaleString("id-ID");
+const fmtIDRShort = n => "Rp " + (n/1000000).toFixed(1).replace(/\.0$/,"") + "jt";
+const timeAgo = h => h < 1 ? "Baru saja" : h < 24 ? `${h} jam lalu` : `${Math.floor(h/24)} hari lalu`;
+const waLink = (job) => {
+  const msg = `Halo, saya tertarik dengan lowongan "${job.title}" di ${job.company} yang saya lihat di SafeTrans Jobs.`;
+  const number = (job.whatsapp || "").replace(/\D/g, "");
+  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
+};
+
+/* ---------------------------- DATA FETCH ---------------------------- */
+async function loadJobs(){
+  state.loading = true;
+  renderList();
+  if(CONFIG.SCRIPT_URL){
+    try{
+      const ctrl = new AbortController();
+      const t = setTimeout(()=>ctrl.abort(), CONFIG.FETCH_TIMEOUT_MS);
+      const res = await fetch(CONFIG.SCRIPT_URL, {signal: ctrl.signal});
+      clearTimeout(t);
+      if(!res.ok) throw new Error("Bad response");
+      const data = await res.json();
+      state.jobs = Array.isArray(data) ? data : (data.jobs || []);
+      state.usingDemo = false;
+    }catch(err){
+      console.warn("Gagal memuat dari Google Sheets, memakai data demo:", err);
+      state.jobs = DEMO_JOBS;
+      state.usingDemo = true;
+    }
+  } else {
+    await new Promise(r=>setTimeout(r, 700)); // simulate network for skeleton UX
+    state.jobs = DEMO_JOBS;
+    state.usingDemo = true;
+  }
+  state.loading = false;
+  renderList();
+}
+
+/* ---------------------------- FILTER LOGIC ---------------------------- */
+function getFilteredJobs(){
+  let list = [...state.jobs];
+
+  if(state.activeCategory !== "Semua Kategori"){
+    list = list.filter(j => j.category === state.activeCategory);
+  }
+  if(state.searchQuery.trim()){
+    const q = state.searchQuery.trim().toLowerCase();
+    list = list.filter(j => j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.location.toLowerCase().includes(q));
+  }
+  const f = state.filters;
+  if(f.categories.length) list = list.filter(j => f.categories.includes(j.category));
+  if(f.jobTypes.length) list = list.filter(j => f.jobTypes.includes(j.jobType));
+  if(f.experience.length) list = list.filter(j => f.experience.includes(j.experience));
+  if(f.minSalary > 0) list = list.filter(j => j.salaryMax >= f.minSalary);
+  if(f.urgentOnly) list = list.filter(j => j.urgent);
+
+  if(f.sort === "Gaji Tertinggi") list.sort((a,b)=>b.salaryMax-a.salaryMax);
+  else if(f.sort === "Jarak Terdekat") list.sort((a,b)=>a.distanceKm-b.distanceKm);
+  else list.sort((a,b)=>a.postedHoursAgo-b.postedHoursAgo);
+
+  return list;
+}
+
+/* ---------------------------- RENDER: CATEGORY DROPDOWN ---------------------------- */
+function renderCategoryPanel(){
+  const panel = document.getElementById('categoryPanel');
+  panel.innerHTML = CATEGORIES.map(c=>`<div class="dropdown-item ${c===state.activeCategory?'active':''}" data-cat="${c}">${c}${c===state.activeCategory? ICON.check:''}</div>`).join('');
+  panel.querySelectorAll('.dropdown-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      state.activeCategory = item.dataset.cat;
+      document.getElementById('categoryLabel').textContent = state.activeCategory;
+      closeDropdown();
+      renderList();
+    });
+  });
+}
+function closeDropdown(){
+  document.getElementById('categoryPanel').classList.remove('show');
+  document.getElementById('categoryBtn').classList.remove('open');
+}
+
+/* ---------------------------- RENDER: SKELETONS ---------------------------- */
+function skeletonHTML(){
+  let out = '';
+  for(let i=0;i<4;i++){
+    out += `<div class="skeleton-card">
+      <div class="sk-row">
+        <div class="sk-box sk-logo"></div>
+        <div class="sk-lines">
+          <div class="sk-box sk-line" style="width:70%"></div>
+          <div class="sk-box sk-line" style="width:45%"></div>
+        </div>
+      </div>
+      <div class="sk-box sk-full" style="width:60%;height:14px;margin-bottom:14px;"></div>
+      <div class="sk-box sk-full"></div>
+      <div class="sk-box sk-btn"></div>
+    </div>`;
+  }
+  return out;
+}
+
+/* ---------------------------- RENDER: JOB CARD ---------------------------- */
+function jobCardHTML(job){
+  const isSaved = state.saved.has(job.id);
+  return `<article class="job-card" data-id="${job.id}">
+    <div class="card-top">
+      ${job.verified ? `<span class="badge badge-verified">${ICON.shield} Terverifikasi</span>` : ''}
+      ${job.urgent ? `<span class="badge badge-urgent">${ICON.bolt} Mendesak</span>` : ''}
+      <button class="bookmark-btn ${isSaved?'saved':''}" data-save="${job.id}" aria-label="Simpan loker">${isSaved?ICON.bookmarkFilled:ICON.bookmark}</button>
+    </div>
+    <div class="card-main">
+      <div class="company-logo">${job.logo}</div>
+      <div>
+        <h3 class="job-title">${job.title}</h3>
+        <div class="company-name">${job.company} ${job.verified?ICON.shield:''}</div>
+      </div>
+    </div>
+    <div class="route-line">${ICON.pin}<span>${job.location}</span><span class="dash"></span><span>${job.distanceKm} km</span></div>
+    <div class="tag-row">${job.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="salary-strip">
+      <span class="salary-value">${fmtIDR(job.salaryMin)} – ${fmtIDR(job.salaryMax)}</span>
+      <span class="salary-period">/ Bulan</span>
+    </div>
+    <div class="recruiter-row">
+      <div class="recruiter-avatar">${job.recruiter.avatar}</div>
+      <div class="recruiter-text">Dipasang oleh <b>${job.recruiter.name}</b></div>
+      <span class="posted-time">${timeAgo(job.postedHoursAgo)}</span>
+    </div>
+    <a class="apply-btn" href="${waLink(job)}" target="_blank" rel="noopener" data-card-link>${ICON.whatsapp} Lamar via WhatsApp</a>
+  </article>`;
+}
+
+function emptyStateHTML(icon, title, text){
+  return `<div class="empty-state">${icon}<h3>${title}</h3><p>${text}</p></div>`;
+}
+
+/* ---------------------------- RENDER: LIST VIEW ---------------------------- */
+function renderList(){
+  const root = document.getElementById('listView');
+
+  let listToRender = getFilteredJobs();
+
+  document.getElementById('resultCount').textContent = state.loading ? '' : `${listToRender.length} loker`;
+
+  let html = '';
+  if(state.usingDemo && !state.demoBannerDismissed && !state.loading){
+    html += `<div class="demo-banner">⚙ Mode Demo — data contoh, belum tersambung ke Google Sheets <button id="dismissBanner">${ICON.x}</button></div>`;
+  }
+
+  if(state.loading){
+    html += skeletonHTML();
+  } else if(listToRender.length === 0){
+    html += emptyStateHTML(ICON.search, "Loker tidak ditemukan", "Coba ubah kata kunci pencarian atau atur ulang filter yang aktif.");
+  } else {
+    html += listToRender.map(jobCardHTML).join('');
+  }
+
+  root.innerHTML = html;
+
+  root.querySelectorAll('[data-card-link]').forEach(link=>{
+    link.addEventListener('click', e=> e.stopPropagation());
+  });
+  root.querySelectorAll('[data-save]').forEach(btn=>{
+    btn.addEventListener('click', e=>{ e.stopPropagation(); toggleSave(parseInt(btn.dataset.save)); });
+  });
+  root.querySelectorAll('.job-card').forEach(card=>{
+    card.addEventListener('click', ()=> openDetail(parseInt(card.dataset.id)));
+  });
+  const dismissBtn = document.getElementById('dismissBanner');
+  if(dismissBtn) dismissBtn.addEventListener('click', e=>{ e.stopPropagation(); state.demoBannerDismissed = true; renderList(); });
+}
+
+function toggleSave(id){
+  if(state.saved.has(id)) state.saved.delete(id); else state.saved.add(id);
+  renderList();
+  if(state.detailJobId === id) renderDetail(id);
+}
+
+/* ---------------------------- RENDER: DETAIL VIEW ---------------------------- */
+function openDetail(id){
+  state.detailJobId = id;
+  renderDetail(id);
+  document.getElementById('detailView').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail(){
+  document.getElementById('detailView').classList.remove('show');
+  document.body.style.overflow = '';
+  setTimeout(()=>{ state.detailJobId = null; }, 320);
+}
+function renderDetail(id){
+  const job = state.jobs.find(j=>j.id===id) || DEMO_JOBS.find(j=>j.id===id);
+  if(!job) return;
+  const isSaved = state.saved.has(job.id);
+  const view = document.getElementById('detailView');
+  view.innerHTML = `
+    <div class="detail-header">
+      <button class="icon-btn" id="detailBack">${ICON.back}</button>
+      <div class="spacer"></div>
+      <button class="icon-btn">${ICON.share}</button>
+    </div>
+    <div class="detail-hero">
+      <div class="detail-logo">${job.logo}</div>
+      <h1 class="detail-title">${job.title}</h1>
+      <div class="detail-company">${job.company} ${job.verified?ICON.shield:''}</div>
+      <div class="detail-meta-row">
+        <span>${ICON.pin} ${job.location}</span>
+        <span>${ICON.clock} ${timeAgo(job.postedHoursAgo)}</span>
+      </div>
+    </div>
+    <div class="stat-strip">
+      <div class="stat-pill salary"><div class="lbl">Gaji / Bulan</div><div class="val">${fmtIDRShort(job.salaryMin)}–${fmtIDRShort(job.salaryMax)}</div></div>
+      <div class="stat-pill"><div class="lbl">Tipe</div><div class="val">${job.jobType}</div></div>
+      <div class="stat-pill"><div class="lbl">Pengalaman</div><div class="val">${job.experience}</div></div>
+      <div class="stat-pill"><div class="lbl">Jarak</div><div class="val">${job.distanceKm} km</div></div>
+    </div>
+
+    <div class="detail-section">
+      <h4>Deskripsi Pekerjaan</h4>
+      <p>${job.description}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Kualifikasi</h4>
+      <ul class="req-list">${job.requirements.map(r=>`<li>${ICON.check}<span>${r}</span></li>`).join('')}</ul>
+    </div>
+
+    <div class="detail-section">
+      <h4>Tunjangan & Benefit</h4>
+      <div class="benefit-row">${job.benefits.map(b=>`<span class="tag">${b}</span>`).join('')}</div>
+    </div>
+
+    <div class="detail-section company-card">
+      <div class="logo-sm">${job.logo}</div>
+      <div class="info">
+        <div class="name">${job.company} ${job.verified?ICON.shield:''}</div>
+        <div class="rating">${ICON.star} ${job.rating} · ${job.companyDesc}</div>
+      </div>
+    </div>
+
+    <div class="detail-section recruiter-card">
+      <div class="av">${job.recruiter.avatar}</div>
+      <div class="info">
+        <div class="name">${job.recruiter.name}</div>
+        <div class="role">${job.recruiter.role} di ${job.company}</div>
+      </div>
+    </div>
+
+    <div style="height:8px;"></div>
+
+    <div class="detail-sticky-bar">
+      <button class="save-toggle-btn ${isSaved?'saved':''}" id="detailSaveBtn">${isSaved?ICON.bookmarkFilled:ICON.bookmark}</button>
+      <a class="apply-btn" href="${waLink(job)}" target="_blank" rel="noopener">${ICON.whatsapp} Lamar via WhatsApp</a>
+    </div>
+  `;
+  document.getElementById('detailBack').addEventListener('click', closeDetail);
+  document.getElementById('detailSaveBtn').addEventListener('click', ()=>toggleSave(job.id));
+}
+
+/* ---------------------------- FILTER SHEET ---------------------------- */
+function filterSheetHTML(){
+  const f = state.filters;
+  const jobTypes = ["Penuh Waktu","Kontrak / Mitra","Harian"];
+  const experiences = ["Tidak Perlu Pengalaman","1-2 Tahun","3+ Tahun"];
+  const cats = CATEGORIES.filter(c=>c!=="Semua Kategori");
+  return `
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><h3>Filter Pencarian</h3><button class="icon-btn" id="closeSheet" style="background:var(--cloud);color:var(--ink);">${ICON.x}</button></div>
+    <div class="sheet-body">
+      <div class="filter-group">
+        <div class="lbl">Kategori</div>
+        <div class="chip-grid">${cats.map(c=>`<button class="opt-chip ${f.categories.includes(c)?'active':''}" data-fcat="${c}">${c}</button>`).join('')}</div>
+      </div>
+      <div class="filter-group">
+        <div class="lbl">Tipe Pekerjaan</div>
+        <div class="chip-grid">${jobTypes.map(c=>`<button class="opt-chip ${f.jobTypes.includes(c)?'active':''}" data-ftype="${c}">${c}</button>`).join('')}</div>
+      </div>
+      <div class="filter-group">
+        <div class="lbl">Pengalaman</div>
+        <div class="chip-grid">${experiences.map(c=>`<button class="opt-chip ${f.experience.includes(c)?'active':''}" data-fexp="${c}">${c}</button>`).join('')}</div>
+      </div>
+      <div class="filter-group">
+        <div class="lbl">Gaji Minimum</div>
+        <div class="range-display"><span>${fmtIDRShort(f.minSalary)}</span><span>15jt+</span></div>
+        <input type="range" min="0" max="15000000" step="500000" value="${f.minSalary}" id="salarySlider">
+      </div>
+      <div class="filter-group">
+        <div class="toggle-row">
+          <span class="lbl">Hanya tampilkan loker mendesak</span>
+          <button class="switch ${f.urgentOnly?'on':''}" id="urgentSwitch"></button>
+        </div>
+      </div>
+      <div class="filter-group" style="margin-bottom:0;">
+        <div class="lbl">Urutkan</div>
+        <select class="select-pill" id="sortSelect">
+          ${["Terbaru","Gaji Tertinggi","Jarak Terdekat"].map(s=>`<option ${f.sort===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="sheet-footer">
+      <button class="reset-btn" id="resetFilters">Reset</button>
+      <button class="apply-btn" id="applyFilters">Terapkan Filter</button>
+    </div>
+  `;
+}
+function openFilterSheet(){
+  document.getElementById('filterSheet').innerHTML = filterSheetHTML();
+  document.getElementById('sheetOverlay').classList.add('show');
+  document.getElementById('filterSheet').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  bindSheetEvents();
+}
+function closeFilterSheet(){
+  document.getElementById('sheetOverlay').classList.remove('show');
+  document.getElementById('filterSheet').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function bindSheetEvents(){
+  const sheet = document.getElementById('filterSheet');
+  sheet.querySelectorAll('[data-fcat]').forEach(b=>b.addEventListener('click', ()=>toggleFilterVal('categories', b.dataset.fcat, b)));
+  sheet.querySelectorAll('[data-ftype]').forEach(b=>b.addEventListener('click', ()=>toggleFilterVal('jobTypes', b.dataset.ftype, b)));
+  sheet.querySelectorAll('[data-fexp]').forEach(b=>b.addEventListener('click', ()=>toggleFilterVal('experience', b.dataset.fexp, b)));
+  const slider = document.getElementById('salarySlider');
+  slider.addEventListener('input', ()=>{
+    state.filters.minSalary = parseInt(slider.value);
+    sheet.querySelector('.range-display span').textContent = fmtIDRShort(state.filters.minSalary);
+  });
+  const urgentSwitch = document.getElementById('urgentSwitch');
+  urgentSwitch.addEventListener('click', ()=>{
+    state.filters.urgentOnly = !state.filters.urgentOnly;
+    urgentSwitch.classList.toggle('on', state.filters.urgentOnly);
+  });
+  document.getElementById('sortSelect').addEventListener('change', e=>{ state.filters.sort = e.target.value; });
+  document.getElementById('closeSheet').addEventListener('click', closeFilterSheet);
+  document.getElementById('resetFilters').addEventListener('click', ()=>{
+    state.filters = {categories:[],jobTypes:[],experience:[],minSalary:0,urgentOnly:false,sort:"Terbaru"};
+    openFilterSheet();
+  });
+  document.getElementById('applyFilters').addEventListener('click', ()=>{
+    closeFilterSheet();
+    document.getElementById('sortChip').textContent = state.filters.sort;
+    renderList();
+  });
+}
+function toggleFilterVal(key, val, btn){
+  const arr = state.filters[key];
+  const idx = arr.indexOf(val);
+  if(idx>-1) arr.splice(idx,1); else arr.push(val);
+  btn.classList.toggle('active');
+}
+
+/* ---------------------------- BOTTOM NAV ---------------------------- */
+function bindBottomNav(){
+  document.querySelectorAll('.nav-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+      document.querySelector('[data-nav="home"]').classList.add('active');
+      if(btn.dataset.nav === 'search'){
+        document.getElementById('searchWrap').classList.add('open');
+        document.getElementById('searchInput').focus();
+      }
+    });
+  });
+}
+
+/* ---------------------------- HEADER INTERACTIONS ---------------------------- */
+function bindHeader(){
+  const searchToggle = document.getElementById('searchToggle');
+  const searchWrap = document.getElementById('searchWrap');
+  const searchInput = document.getElementById('searchInput');
+  searchToggle.addEventListener('click', ()=>{
+    searchWrap.classList.toggle('open');
+    if(searchWrap.classList.contains('open')) searchInput.focus();
+  });
+  searchInput.addEventListener('input', e=>{
+    state.searchQuery = e.target.value;
+    renderList();
+  });
+
+  const catBtn = document.getElementById('categoryBtn');
+  catBtn.addEventListener('click', ()=>{
+    const panel = document.getElementById('categoryPanel');
+    const opening = !panel.classList.contains('show');
+    panel.classList.toggle('show', opening);
+    catBtn.classList.toggle('open', opening);
+  });
+  document.addEventListener('click', e=>{
+    if(!catBtn.contains(e.target) && !document.getElementById('categoryPanel').contains(e.target)){
+      closeDropdown();
+    }
+  });
+
+  document.getElementById('openFilters').addEventListener('click', openFilterSheet);
+  document.getElementById('sheetOverlay').addEventListener('click', closeFilterSheet);
+}
+
+/* ---------------------------- INIT ---------------------------- */
+function init(){
+  renderCategoryPanel();
+  bindHeader();
+  bindBottomNav();
+  loadJobs();
+}
+init();
+</script>
+</body>
+</html>
