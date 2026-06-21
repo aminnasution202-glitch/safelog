@@ -686,7 +686,7 @@
       <div class="alert alert-success" id="bookingSuccess"></div>
 
       <button class="btn btn-primary btn-full" id="btnBooking" onclick="doBooking()">
-        Lanjut Pembayaran
+        Lanjut Pemesanan
       </button>
     </div><!-- /booking-card -->
     </div>
@@ -961,7 +961,7 @@ async function doBooking() {
   } catch (_) {}
 
   setLoading('btnBooking', false, 'Lanjut Pembayaran');
-  showAlert('bookingSuccess', '✓ Pemesanan berhasil dikirim! Nomor booking: ' + booking.bookingNumber, 'success');
+  showAlert('bookingSuccess', '✓ Pemesanan berhasil dikirim! anda akan dihubungi dalam 5 menit dengan nomor booking: ' + booking.bookingNumber, 'success');
   showToast('Pemesanan dikirim!');
 
   // Uncomment baris berikut jika halaman payment sudah ada:
